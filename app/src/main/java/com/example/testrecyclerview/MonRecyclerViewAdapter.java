@@ -3,6 +3,7 @@ package com.example.testrecyclerview;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,11 +13,11 @@ import java.util.ArrayList;
 public class MonRecyclerViewAdapter extends RecyclerView.Adapter<MonRecyclerViewAdapter.ConteneurDeDonnee>
 {
     private static DetecteurDeClicSurRecycler detecteurDeClicSurRecycler;
-    private ArrayList<Donnee> donnees;
-    public MonRecyclerViewAdapter(ArrayList<Donnee> donnees)
-    {
-        this.donnees = donnees;
+    private ArrayList<Planete> planetes;
 
+    public MonRecyclerViewAdapter(ArrayList<Planete> planetes)
+    {
+        this.planetes = planetes;
     }
 
     @Override
@@ -26,14 +27,15 @@ public class MonRecyclerViewAdapter extends RecyclerView.Adapter<MonRecyclerView
         return new ConteneurDeDonnee(view);
     }
     @Override
-    public void onBindViewHolder(ConteneurDeDonnee conteneur, int
-            position) {
-        conteneur.tv_principal.setText(donnees.get(position).getPrincipal());
-        conteneur.tv_auxiliaire.setText(donnees.get(position).getAuxiliaire());
+    public void onBindViewHolder(ConteneurDeDonnee conteneur, int position)
+    {
+        conteneur.tv_principal.setText(planetes.get(position).getPrincipal());
+        conteneur.tv_auxiliaire.setText(planetes.get(position).getAuxiliaire());
+        conteneur.tv_image.setImageResource(planetes.get(position).getImage());
     }
     @Override
     public int getItemCount() {
-        return donnees.size();
+        return planetes.size();
     }
 
 
@@ -41,10 +43,12 @@ public class MonRecyclerViewAdapter extends RecyclerView.Adapter<MonRecyclerView
 
         TextView tv_principal;
         TextView tv_auxiliaire;
+        ImageView tv_image;
         public ConteneurDeDonnee(View itemView) {
             super(itemView);
             tv_principal = (TextView) itemView.findViewById(R.id.tv_principal);
             tv_auxiliaire = (TextView) itemView.findViewById(R.id.tv_auxiliaire);
+            tv_image = (ImageView) itemView.findViewById(R.id.tv_image);
             itemView.setOnClickListener(this);
         }
 
